@@ -33,5 +33,8 @@ interface ListItemDatabaseDao {
     @Query("UPDATE list_item_table SET basket =:isInBasket WHERE listId =:listID")
     suspend fun updateItem(listID: Long?, isInBasket: Boolean?): Int
 
+    @Query("SELECT COUNT(listId)  from list_item_table  WHERE list_key = :key")
+    fun getRowCount(key: Long): LiveData<Int?>?
+
 }
 

@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import androidx.room.Update
 
 @Dao
 interface ShoppingListDatabaseDao {
@@ -23,5 +22,11 @@ interface ShoppingListDatabaseDao {
 
     @Query("SELECT * FROM shopping_lists_table WHERE archived=1 ORDER BY listId DESC")
     fun getArchivedLists(): LiveData<List<ShoppingList>>
+
+    @Query("SELECT COUNT(listId) FROM shopping_lists_table WHERE archived=0 ")
+    fun getRowCount(): LiveData<Int?>?
+
+    @Query("SELECT COUNT(listId) FROM shopping_lists_table WHERE archived=1")
+    fun getRowCountArchived(): LiveData<Int?>?
 }
 

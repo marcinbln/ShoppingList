@@ -1,8 +1,10 @@
 package com.example.android.shoppingList.utils
 
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.shoppingList.R
 import com.example.android.shoppingList.activelists.HomeAdapter
@@ -62,6 +64,19 @@ fun setItemImage(imageView: ImageView, item: ListItem?) {
     }
 }
 
+// Bind empty_view
+@BindingAdapter("empty_view")
+fun bindEmptyView(imageView: ImageView, dbCount: Int) {
+
+    if(dbCount>0) {
+        imageView.visibility = View.GONE
+    }
+
+    else {
+        imageView.visibility = View.VISIBLE
+        imageView.setImageResource(R.drawable.ic_empty_cart)
+    }
+}
 
 
 

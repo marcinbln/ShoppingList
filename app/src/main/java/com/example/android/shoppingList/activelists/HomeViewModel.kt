@@ -21,6 +21,8 @@ class HomeViewModel(
 
     // Retrieve all active lists from the database
     val shoppingLists = database.getAllActiveLists()
+    val dbRowCount = database.getRowCount()
+
 
     // Boolean and methods to control showing the snackbar
     private var _showSnackbarEvent = MutableLiveData<Boolean>()

@@ -16,6 +16,8 @@ class ArchiveViewModel(
     // Retrieve all archived lists from the database
     val shoppingLists = database.getArchivedLists()
 
+    val dbRowCount = database.getRowCountArchived()
+
     // Boolean and methods to control showing the snackbar
     private var _showSnackbarEvent = MutableLiveData<Boolean>()
 

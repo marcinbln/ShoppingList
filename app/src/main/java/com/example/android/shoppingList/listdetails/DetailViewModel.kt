@@ -23,6 +23,9 @@ class DetailViewModel(
 
     var shoppingList = MutableLiveData<ShoppingList?>()
 
+    val dbRowCount = database.getRowCount(shoppingListKey)
+
+
     init {
         initializeSelectedList()
     }
