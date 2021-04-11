@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="item"
+            type="com.example.android.shoppingList.database.ListItem" />
+
+        <variable
+            name="archive"
+            type="Boolean" />
+
+        <variable
+            name="clickListener"
+            type="com.example.android.shoppingList.listdetails.ListItemListener" />
+
+        <variable
+            name="clickListener2"
+            type="com.example.android.shoppingList.listdetails.ListItemListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:foreground="?selectableItemBackground"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/check_image"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
+            android:onClick="@{(view)-> archive ? null :clickListener.onClick(view, item)  }"
+            app:itemImage="@{item}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@drawable/check_circle_outline_off" />
+
+        <TextView
+            android:id="@+id/list_name"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:gravity="center|left"
+            android:maxLines="1"
+            android:text="@{item.itemName}"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/list_item_subtitle"
+            app:layout_constraintEnd_toStartOf="@+id/bin_image"
+            app:layout_constraintStart_toEndOf="@+id/check_image"
+            app:layout_constraintTop_toTopOf="@+id/check_image"
+            tools:text="Bread" />
+
+        <TextView
+            android:id="@+id/list_item_subtitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text= "@{String.format(@string/quantity_format, item.quantity )}"
+
+            app:layout_constraintBottom_toBottomOf="@+id/check_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/check_image"
+            tools:text="x6" />
+
+        <ImageView
+            android:id="@+id/bin_image"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:onClick="@{(view) -> clickListener.onClickDelete(view, item)}"
+            android:visibility="@{archive? View.GONE : View.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/baseline_delete_outline_24" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App title and fragment titles -->
+    <string name="app_name">Shopping Lists</string>
+    <string name="home_fragment">Shopping Lists</string>
+    <string name="detail_title">Shopping list details</string>
+
+    <!-- Navigation label -->
+    <string name="detail_fragment">Shopping list details</string>
+
+    <!-- Snackbar message -->
+    <string name="cleared_message">All your data is gone forever.</string>
+
+    <!-- Strings for overflow menu -->
+    <string name="archive_list">Archive list</string>
+    <string name="delete_list">Delete list</string>
+    <string name="delete_all">Delete all lists</string>
+
+    <!-- Strings for bottom nav -->
+    <string name="active_lists">Active lists</string>
+    <string name="archive">Archived lists</string>
+
+    <!-- Strings for dialog -->
+    <string name="enter_list_name">Enter list name</string>
+    <string name="save_button_dialog">Save</string>
+    <string name="cancel_button_dialog">Cancel</string>
+    <string name="list_item_name">List item name</string>
+
+    <string name="quantity_format">x %s</string>
+
+</resources>

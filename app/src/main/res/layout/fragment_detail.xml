@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <!-- Data to make available to the XML via data binding. In this case,
+         the whole ViewModel, so that we can access the LiveData,
+         click handlers, and state variables. -->
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="archive"
+            type="Boolean" />
+
+        <variable
+            name="detailViewModel"
+            type="com.example.android.shoppingList.listdetails.DetailViewModel" />
+
+
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".listdetails.DetailFragment">
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/detail_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                app:itemsData="@{detailViewModel.items}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="16dp"
+            android:onClick="@{() -> detailViewModel.onFabClicked()}"
+            android:visibility="@{archive? View.GONE : View.VISIBLE}"
+            app:fabSize="auto"
+            app:rippleColor="@color/colorPrimary"
+            app:srcCompat="@drawable/outline_add_24"
+            tools:layout_editor_absoluteX="339dp"
+
+            />
+
+    </FrameLayout>
+
+</layout>
