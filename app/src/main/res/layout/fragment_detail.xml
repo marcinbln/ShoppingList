@@ -48,15 +48,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
-            android:layout_margin="16dp"
+            android:layout_margin="32dp"
             android:onClick="@{() -> detailViewModel.onFabClicked()}"
             android:visibility="@{archive? View.GONE : View.VISIBLE}"
             app:fabSize="auto"
             app:rippleColor="@color/colorPrimary"
-            app:srcCompat="@drawable/outline_add_24"
-            tools:layout_editor_absoluteX="339dp"
-
-            />
+            app:srcCompat="@drawable/outline_add_24" />
 
     </FrameLayout>
 

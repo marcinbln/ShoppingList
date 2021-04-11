@@ -54,7 +54,7 @@
                 android:id="@+id/fab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
+                android:layout_margin="32dp"
                 android:onClick="@{() -> homeViewModel.onFabClicked()}"
                 app:fabSize="auto"
                 app:layout_constraintBottom_toBottomOf="parent"
