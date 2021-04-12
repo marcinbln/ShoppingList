@@ -7,6 +7,7 @@ Netguru project
 * LiveData
 * Data Binding
 * Navigation component with safe args
+* Coroutines for database tasks 
 
 
 
