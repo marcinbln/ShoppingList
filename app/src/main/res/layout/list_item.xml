@@ -70,7 +70,7 @@
             android:layout_marginEnd="8dp"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text= "@{String.format(@string/quantity_format, item.quantity )}"
+            android:text="@{String.format(@string/quantity_format, item.quantity )}"
 
             app:layout_constraintBottom_toBottomOf="@+id/check_image"
             app:layout_constraintEnd_toEndOf="parent"

@@ -110,7 +110,6 @@ class DetailFragment : Fragment() {
     }
 
 
-
     // Inflate overflow menu layout
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
 

@@ -1,10 +1,10 @@
 package com.example.android.shoppingList.utils
 
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
 import org.junit.Test
 
 
-class ConvertEpochToStringTest{
+class ConvertEpochToStringTest {
 
     @Test
     fun testEpochTimeToStringConversion() {
@@ -17,18 +17,7 @@ class ConvertEpochToStringTest{
 
         assertEquals(result, expected)
 
-
-
-
     }
-
-
-
-
-
-
-
-
 
 
 }
