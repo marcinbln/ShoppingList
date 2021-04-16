@@ -57,6 +57,4 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
             supportActionBar?.subtitle = ""
         }
     }
-
-
 }
