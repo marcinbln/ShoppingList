@@ -11,7 +11,7 @@ class ConvertEpochToStringTest {
 
         val fakeEpochTime = 1618170128826L
 
-        val result = convertEpochtoString(1618170128826)
+        val result = convertEpochtoString(fakeEpochTime)
 
         val expected = "21:42 11/04/2021"  //  GMT+02:00 DST
 

@@ -1,18 +1,17 @@
-@file:Suppress("DEPRECATION")
-
 package com.example.android.shoppingList
 
 
 import android.view.View
 import android.view.ViewGroup
+import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition
 import androidx.test.espresso.matcher.ViewMatchers.*
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
+import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import androidx.test.rule.ActivityTestRule
 import com.example.android.shoppingList.EspressoTestsMatchers.withDrawable
 import org.hamcrest.Description
@@ -25,14 +24,13 @@ import org.junit.runner.RunWith
 
 // Basic test:  create, delete, archive a shopping list
 //              create and delete list item, test the check mark
-
 @LargeTest
-@RunWith(AndroidJUnit4::class)
+@RunWith(AndroidJUnit4ClassRunner::class)
 class BasicExploratoryTest {
 
-    @Rule
-    @JvmField
-    var mActivityTestRule = ActivityTestRule(MainActivity::class.java)
+    @get:Rule
+    var activityRule: ActivityScenarioRule<MainActivity>
+            = ActivityScenarioRule(MainActivity::class.java)
 
     @Test
     fun basicTest() {

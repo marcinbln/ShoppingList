@@ -1,26 +1,24 @@
 package com.example.android.shoppingList
-
-
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.*
-import androidx.test.espresso.matcher.ViewMatchers.*
-import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.filters.LargeTest
-import androidx.test.rule.ActivityTestRule
-
+import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 // Automate creating the shopping list
-@Suppress("DEPRECATION")
 @LargeTest
-@RunWith(AndroidJUnit4::class)
+@RunWith(AndroidJUnit4ClassRunner::class)
 class AddXlists {
 
-    @Rule
-    @JvmField
-    var mActivityTestRule = ActivityTestRule(MainActivity::class.java)
+    @get:Rule
+    var activityRule: ActivityScenarioRule<MainActivity>
+            = ActivityScenarioRule(MainActivity::class.java)
+
+
 
     @Test
     fun addXlists() {
