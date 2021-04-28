@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <import type="android.view.View" />
 
         <variable
@@ -46,7 +44,7 @@
             tools:srcCompat="@drawable/check_circle_outline_off" />
 
         <TextView
-            android:id="@+id/list_name"
+            android:id="@+id/list_item_name"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="8dp"

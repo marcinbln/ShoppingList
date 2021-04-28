@@ -67,7 +67,7 @@ class HomeFragment : Fragment() {
                 is LiveDataEvents.dialogEvent -> if (it.showDialog) {
                     showDialog(); homeViewModel.dialogReset()
                 }
-                is LiveDataEvents.snackBarEvent -> if (it.shnowSnackbar) {
+                is LiveDataEvents.snackBarEvent -> if (it.showSnackbar) {
                     showSnackBar(); homeViewModel.snackbarReset()
                 }
                 is LiveDataEvents.navigateToDetailViewEvent -> {
