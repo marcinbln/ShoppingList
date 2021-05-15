@@ -46,7 +46,7 @@ dependencies {
     // Room and Lifecycle dependencies
     implementation "androidx.room:room-runtime:$version_room"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    androidTestImplementation 'androidx.test:rules:1.3.1-alpha03'
+    androidTestImplementation 'androidx.test:rules:1.4.0-alpha05'
     androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.4.0-alpha05'
     kapt "androidx.room:room-compiler:$version_room"
     implementation "androidx.lifecycle:lifecycle-extensions:$version_lifecycle_extensions"
@@ -66,8 +66,13 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:$version_navigation"
 
     // Testing
-    testImplementation 'junit:junit:4.12'
+
+    // Espresso
+// Core library
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+// AndroidJUnitRunner and JUnit Rules
+    androidTestImplementation 'androidx.test:runner:1.3.0'
+    androidTestImplementation 'androidx.test:rules:1.0.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }
 

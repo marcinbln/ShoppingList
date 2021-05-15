@@ -31,9 +31,11 @@ import com.example.android.shoppingList.database.AppDatabase
 import com.example.android.shoppingList.databinding.FragmentDetailBinding
 import com.example.android.shoppingList.utils.optionsMenu
 import kotlinx.android.synthetic.main.list_item_dialog.view.*
+import kotlinx.android.synthetic.main.list_title_dialog.view.*
 import kotlinx.android.synthetic.main.list_title_dialog.view.dialog_cancel_button
 import kotlinx.android.synthetic.main.list_title_dialog.view.dialog_list_name
 import kotlinx.android.synthetic.main.list_title_dialog.view.dialog_save_button
+
 
 // A fragment to show items on the shopping list
 class DetailFragment : Fragment() {
@@ -108,7 +110,6 @@ class DetailFragment : Fragment() {
 
 
     }
-
 
 
     // Inflate overflow menu layout

@@ -27,6 +27,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.android.shoppingList.R
 import com.example.android.shoppingList.database.AppDatabase
 import com.example.android.shoppingList.databinding.FragmentHomeBinding
+import com.example.android.shoppingList.utils.LiveDataEvents
 import com.example.android.shoppingList.utils.optionsMenu
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.list_title_dialog.view.*
@@ -57,57 +58,52 @@ class HomeFragment : Fragment() {
         binding.homeViewModel = homeViewModel
         binding.lifecycleOwner = this
 
-        // Add an Observer on the state variable for showing a Snackbar message
-        homeViewModel.showSnackBarEvent.observe(viewLifecycleOwner, Observer {
-            if (it == true) { // Observed state is true.
-                Snackbar.make(
-                        requireActivity().findViewById(android.R.id.content),
-                        getString(R.string.cleared_message),
-                        Snackbar.LENGTH_SHORT // How long to display the message.
-                ).show()
-                // Reset state to make sure the snackbar is only shown once, even if the device
-                // has a configuration change.
-                homeViewModel.doneShowingSnackbar()
-            }
-        })
-
-        // Add an Observer on showDialog to be notified when add button is tapped
-        homeViewModel.showDialog.observe(viewLifecycleOwner, Observer {
-            if (it == true) { // Observed state is true.
-                showDialog()
-            }
-
-        })
-
-        // Add an Observer on navigateToListDetails to be notified when to navigate to detail view
-        homeViewModel.navigateToListDetails.observe(viewLifecycleOwner, Observer { ShoppingList ->
-            ShoppingList?.let {
-                this.findNavController().navigate(
-                        HomeFragmentDirections
-                                .actionHomeFragmentToDetailFragment(ShoppingList))
-                // Reset state to make sure we only navigate once, even if the device
-                // has a configuration change.
-                homeViewModel.onListDetailsNavigated()
-            }
-        })
-
         val adapter = HomeAdapter(HomeListener { listID ->
             homeViewModel.onShoppingListClicked(listID)
+        })
+
+        homeViewModel.eventsToObserve.observe(viewLifecycleOwner, Observer {
+            when (it) {
+                is LiveDataEvents.dialogEvent -> if (it.showDialog) {
+                    showDialog(); homeViewModel.dialogReset()
+                }
+                is LiveDataEvents.snackBarEvent -> if (it.showSnackbar) {
+                    showSnackBar(); homeViewModel.snackbarReset()
+                }
+                is LiveDataEvents.navigateToDetailViewEvent -> {
+                    handleDetailNavigation(it)
+                }
+            }
         })
 
         // Give binding object a reference to the adapter
         binding.homeRecyclerview.adapter = adapter
 
-        homeViewModel.shoppingLists.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                adapter.submitList(it)
-            }
-        })
-
         // Show overflow menu/up button
         setHasOptionsMenu(true)
 
         return binding.root
+    }
+
+    private fun handleDetailNavigation(it: LiveDataEvents.navigateToDetailViewEvent) {
+        it.shoppingList?.let {
+            navigateToListDetails(it);
+            homeViewModel.detailNavigationReset()
+        }
+    }
+
+    private fun navigateToListDetails(ShoppingList: Long) {
+        this.findNavController().navigate(
+                HomeFragmentDirections
+                        .actionHomeFragmentToDetailFragment(ShoppingList))
+    }
+
+    private fun showSnackBar() {
+        Snackbar.make(
+                requireActivity().findViewById(android.R.id.content),
+                getString(R.string.cleared_message),
+                Snackbar.LENGTH_SHORT // How long to display the message.
+        ).show()
     }
 
     private fun showDialog() {
@@ -137,7 +133,6 @@ class HomeFragment : Fragment() {
             //dismiss dialog
             mAlertDialog.dismiss()
         }
-        homeViewModel.doneShowingDialog()
     }
 
     // Inflate overflow menu layout

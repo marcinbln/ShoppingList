@@ -2,11 +2,11 @@ package com.example.android.shoppingList.activelists
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.android.shoppingList.database.ShoppingList
 import com.example.android.shoppingList.database.ShoppingListDatabaseDao
+import com.example.android.shoppingList.utils.LiveDataEvents
 import com.example.android.shoppingList.utils.optionsMenu
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -23,43 +23,30 @@ class HomeViewModel(
     val shoppingLists = database.getAllActiveLists()
     val dbRowCount = database.getRowCount()
 
+    var _eventsToObserve: MutableLiveData<LiveDataEvents> = MutableLiveData()
 
-    // Boolean and methods to control showing the snackbar
-    private var _showSnackbarEvent = MutableLiveData<Boolean>()
+    val eventsToObserve: MutableLiveData<LiveDataEvents>
+        get() = _eventsToObserve
 
-    val showSnackBarEvent: LiveData<Boolean>
-        get() = _showSnackbarEvent
-
-    fun doneShowingSnackbar() {
-        _showSnackbarEvent.value = false
+    fun snackbarReset() {
+        _eventsToObserve.value = LiveDataEvents.snackBarEvent(false)
     }
 
     // Boolean and methods to control showing list name dialog
-    private var _showDialog = MutableLiveData<Boolean>()
-
-    val showDialog: LiveData<Boolean>
-        get() = _showDialog
-
     fun onFabClicked() {
-        _showDialog.value = true
+        _eventsToObserve.value = LiveDataEvents.dialogEvent(true)
     }
 
-    fun doneShowingDialog() {
-        _showDialog.value = false
+    fun dialogReset() {
+        _eventsToObserve.value = LiveDataEvents.dialogEvent(false)
     }
-
-    // Boolean and methods to control navigating to the detail view
-    private val _navigateToListDetails = MutableLiveData<Long>()
-
-    val navigateToListDetails
-        get() = _navigateToListDetails
 
     fun onShoppingListClicked(id: Long) {
-        _navigateToListDetails.value = id
+        _eventsToObserve.value = LiveDataEvents.navigateToDetailViewEvent(id)
     }
 
-    fun onListDetailsNavigated() {
-        _navigateToListDetails.value = null
+    fun detailNavigationReset() {
+        _eventsToObserve.value = LiveDataEvents.navigateToDetailViewEvent(null)
     }
 
     // doneEnteringListName is called from HomeFragment once list name is entered
@@ -90,7 +77,7 @@ class HomeViewModel(
         viewModelScope.launch {
             database.clearAllActive()
         }
-        _showSnackbarEvent.value = true
+        _eventsToObserve.value = LiveDataEvents.snackBarEvent(true)
     }
 }
 
